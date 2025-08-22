@@ -8,7 +8,7 @@ import AddProduct from "./components/AddProduct.jsx";
 import ProductList from "./components/ProductList.jsx";
 import Orderlist from "./components/Orderlist.jsx";
 import Signup from "./components/Signup.jsx";
-import SignIn from "./components/Singin.jsx";
+import SignIn from "./components/SignIn.jsx";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
