@@ -75,7 +75,10 @@ const Signup = () => {
 
     console.log("Sending user data:", AdminuserData);
     try {
-      await axios.post("http://localhost:5000/api/adminusers", AdminuserData);
+      await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/adminusers`,
+        AdminuserData
+      );
       message.success("Registration successful!");
       navigate("/SignIn");
     } catch (error) {

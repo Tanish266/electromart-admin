@@ -62,7 +62,7 @@ const AddProduct = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:5000/api/addProduct",
+        `${process.env.REACT_APP_API_URL}/api/addProduct`,
         formData,
         {
           headers: {

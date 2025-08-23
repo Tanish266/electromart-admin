@@ -52,7 +52,7 @@ const ProductList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/products/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/products/${id}`);
 
       message.success("Delete Product SuccessFully");
       setProducts((prev) => prev.filter((product) => product.id !== id));
@@ -71,16 +71,19 @@ const ProductList = () => {
       setLoading(true);
       try {
         // Refetch product list
-        const response = await axios.get(`http://localhost:5000/api/products`, {
-          params: {
-            searchText,
-            selectedCategory,
-            selectedStock,
-            selectedStatus,
-            page: currentPage,
-            limit: pageSize,
-          },
-        });
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/products`,
+          {
+            params: {
+              searchText,
+              selectedCategory,
+              selectedStock,
+              selectedStatus,
+              page: currentPage,
+              limit: pageSize,
+            },
+          }
+        );
         setProducts(response.data || []);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -160,7 +163,7 @@ const ProductList = () => {
       render: (text, record) => (
         <div className="product-info">
           <img
-            src={`http://localhost:5000/p_image/${record.MainImage}`}
+            src={`${process.env.REACT_APP_API_URL}/p_image/${record.MainImage}`}
             alt={record.ProductName}
             className="product-image"
             onError={(e) => {
@@ -193,9 +196,12 @@ const ProductList = () => {
           checked={unit > 0}
           onChange={async (checked) => {
             const newUnit = checked ? 1 : 0;
-            await axios.put(`http://localhost:5000/api/products/${record.id}`, {
-              Unit: newUnit,
-            });
+            await axios.put(
+              `${process.env.REACT_APP_API_URL}/api/products/${record.id}`,
+              {
+                Unit: newUnit,
+              }
+            );
             setProducts((prev) =>
               prev.map((p) =>
                 p.id === record.id ? { ...p, Unit: newUnit } : p
@@ -266,7 +272,7 @@ const ProductList = () => {
                     uid: index.toString(),
                     name: img,
                     status: "done",
-                    url: `http://localhost:5000/p_image/${img}`,
+                    url: `${process.env.REACT_APP_API_URL}/p_image/${img}`,
                   })
                 ),
               });
@@ -398,7 +404,7 @@ const ProductList = () => {
 
       // Send the form data to the backend
       await axios.put(
-        `http://localhost:5000/api/products/${editProduct.id}`,
+        `${process.env.REACT_APP_API_URL}/api/products/${editProduct.id}`,
         formData,
         {
           headers: {

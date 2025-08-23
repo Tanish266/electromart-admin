@@ -96,7 +96,7 @@ const Orderlist = () => {
 
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/orders/all",
+          `${process.env.REACT_APP_API_URL}/api/orders/all`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
