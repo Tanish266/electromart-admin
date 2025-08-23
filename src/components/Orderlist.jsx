@@ -96,7 +96,7 @@ const Orderlist = () => {
 
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/orders/all`,
+          `${import.meta.env.VITE_API_URL}/api/orders/all`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

@@ -52,7 +52,7 @@ const ProductList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/products/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/products/${id}`);
 
       message.success("Delete Product SuccessFully");
       setProducts((prev) => prev.filter((product) => product.id !== id));
@@ -72,7 +72,7 @@ const ProductList = () => {
       try {
         // Refetch product list
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/products`,
+          `${import.meta.env.VITE_API_URL}/api/products`,
           {
             params: {
               searchText,
@@ -163,7 +163,7 @@ const ProductList = () => {
       render: (text, record) => (
         <div className="product-info">
           <img
-            src={`${process.env.REACT_APP_API_URL}/p_image/${record.MainImage}`}
+            src={`${import.meta.env.VITE_API_URL}/p_image/${record.MainImage}`}
             alt={record.ProductName}
             className="product-image"
             onError={(e) => {
@@ -197,7 +197,7 @@ const ProductList = () => {
           onChange={async (checked) => {
             const newUnit = checked ? 1 : 0;
             await axios.put(
-              `${process.env.REACT_APP_API_URL}/api/products/${record.id}`,
+              `${import.meta.env.VITE_API_URL}/api/products/${record.id}`,
               {
                 Unit: newUnit,
               }
@@ -272,7 +272,7 @@ const ProductList = () => {
                     uid: index.toString(),
                     name: img,
                     status: "done",
-                    url: `${process.env.REACT_APP_API_URL}/p_image/${img}`,
+                    url: `${import.meta.env.VITE_API_URL}/p_image/${img}`,
                   })
                 ),
               });
@@ -404,7 +404,7 @@ const ProductList = () => {
 
       // Send the form data to the backend
       await axios.put(
-        `${process.env.REACT_APP_API_URL}/api/products/${editProduct.id}`,
+        `${import.meta.env.VITE_API_URL}/api/products/${editProduct.id}`,
         formData,
         {
           headers: {

@@ -76,7 +76,7 @@ const Signup = () => {
     console.log("Sending user data:", AdminuserData);
     try {
       await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/adminusers`,
+        `${import.meta.env.VITE_API_URL}/api/adminusers`,
         AdminuserData
       );
       message.success("Registration successful!");
