@@ -7,19 +7,19 @@ import axios from "axios";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const [adminuser, setadminUser] = useState(null);
+  const [adminuser, setadminuser] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const storedadminUser = localStorage.getItem("adminuser");
+    const storedadminuser = localStorage.getItem("adminuser");
     const storedToken = localStorage.getItem("token");
 
-    console.log("Stored user data:", storedadminUser);
+    console.log("Stored user data:", storedadminuser);
     console.log("Stored token:", storedToken);
 
-    if (storedadminUser && storedToken) {
+    if (storedadminuser && storedToken) {
       try {
-        const parsedUser = JSON.parse(storedadminUser);
+        const parsedUser = JSON.parse(storedadminuser);
 
         // Check token validity
         const tokenExpiration = JSON.parse(atob(storedToken.split(".")[1])).exp;
@@ -28,7 +28,7 @@ const SignIn = () => {
           localStorage.removeItem("token");
           message.error("Session expired. Please log in again.");
         } else {
-          setadminUser(parsedUser);
+          setadminuser(parsedUser);
         }
       } catch (error) {
         console.error("Invalid user data or token in localStorage:", error);
@@ -52,15 +52,15 @@ const SignIn = () => {
       console.log("Raw login response:", response.data);
 
       if (response.data.success) {
-        const { adminuser, token } = response.data;
+        const { Adminuser, token } = response.data;
 
         // Check if adminuser and token are properly received
-        if (adminuser && token) {
-          localStorage.setItem("adminuser", JSON.stringify(adminuser));
+        if (Adminuser && token) {
+          localStorage.setItem("adminuser", JSON.stringify(Adminuser));
           localStorage.setItem("token", token);
 
           message.success("Login successful!");
-          setadminUser(adminuser);
+          setadminuser(Adminuser);
           navigate("/");
         } else {
           message.error("Failed to retrieve user data.");

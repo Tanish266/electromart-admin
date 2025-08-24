@@ -63,7 +63,7 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
 
   const onFinish = async (values) => {
-    const AdminuserData = {
+    const adminuserData = {
       email: values.email.trim(),
       password: values.password.trim(),
       name: values.name.trim(),
@@ -73,11 +73,11 @@ const Signup = () => {
       birthDate: values.birthDate ? values.birthDate.format("YYYY-MM-DD") : "",
     };
 
-    console.log("Sending user data:", AdminuserData);
+    console.log("Sending user data:", adminuserData);
     try {
       await axios.post(
         `${import.meta.env.VITE_API_URL}/api/adminusers`,
-        AdminuserData
+        adminuserData
       );
       message.success("Registration successful!");
       navigate("/SignIn");
