@@ -44,9 +44,9 @@ const Header = () => {
     });
   };
 
-  // const adminuser = localStorage.getItem("adminuser");
+  const adminuser = localStorage.getItem("adminuser");
   // Parse the stored JSON string
-  const adminuser = JSON.parse(localStorage.getItem("adminuser") || "null");
+  // const adminuser = JSON.parse(localStorage.getItem("adminuser") || "null");
   console.log("Admin User:", adminuser);
   console.log("Admin User Type:", typeof adminuser);
 

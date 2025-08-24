@@ -7,32 +7,32 @@ import axios from "axios";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const [AdminUser, setAdminUser] = useState(null);
+  const [adminuser, setadminUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const storedAdminUser = localStorage.getItem("Adminuser");
+    const storedadminUser = localStorage.getItem("adminuser");
     const storedToken = localStorage.getItem("token");
 
-    console.log("Stored user data:", storedAdminUser);
+    console.log("Stored user data:", storedadminUser);
     console.log("Stored token:", storedToken);
 
-    if (storedAdminUser && storedToken) {
+    if (storedadminUser && storedToken) {
       try {
-        const parsedUser = JSON.parse(storedAdminUser);
+        const parsedUser = JSON.parse(storedadminUser);
 
         // Check token validity
         const tokenExpiration = JSON.parse(atob(storedToken.split(".")[1])).exp;
         if (Date.now() >= tokenExpiration * 1000) {
-          localStorage.removeItem("Adminuser");
+          localStorage.removeItem("adminuser");
           localStorage.removeItem("token");
           message.error("Session expired. Please log in again.");
         } else {
-          setAdminUser(parsedUser);
+          setadminUser(parsedUser);
         }
       } catch (error) {
         console.error("Invalid user data or token in localStorage:", error);
-        localStorage.removeItem("Adminuser");
+        localStorage.removeItem("adminuser");
         localStorage.removeItem("token");
       }
     }
@@ -52,15 +52,15 @@ const SignIn = () => {
       console.log("Raw login response:", response.data);
 
       if (response.data.success) {
-        const { Adminuser, token } = response.data;
+        const { adminuser, token } = response.data;
 
-        // Check if Adminuser and token are properly received
-        if (Adminuser && token) {
-          localStorage.setItem("Adminuser", JSON.stringify(Adminuser));
+        // Check if adminuser and token are properly received
+        if (adminuser && token) {
+          localStorage.setItem("adminuser", JSON.stringify(adminuser));
           localStorage.setItem("token", token);
 
           message.success("Login successful!");
-          setAdminUser(Adminuser);
+          setadminUser(adminuser);
           navigate("/");
         } else {
           message.error("Failed to retrieve user data.");
