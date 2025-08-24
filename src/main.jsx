@@ -9,7 +9,7 @@ import ProductList from "./components/ProductList.jsx";
 import Orderlist from "./components/Orderlist.jsx";
 import Signup from "./components/Signup.jsx";
 import SignIn from "./components/SignIn.jsx";
-
+import ProfilePage from "./components/ProfilePage.jsx";
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
   { path: "/Signup", element: <Signup /> },
@@ -18,6 +18,7 @@ const router = createBrowserRouter([
   { path: "/dashboard", element: <App /> },
   { path: "/product-list", element: <ProductList /> },
   { path: "/order-list", element: <Orderlist /> },
+  { path: "/profile", element: <ProfilePage /> },
 ]);
 
 createRoot(document.getElementById("root")).render(

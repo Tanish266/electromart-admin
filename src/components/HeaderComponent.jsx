@@ -62,9 +62,9 @@ const Header = () => {
   // ✅ Popover content for logged-in user
   const contentLoggedIn = (
     <div>
-      <Link to="/Your-Account" style={{ textDecoration: "none" }}>
-        Your Account
-      </Link>
+      <Button type="link" onClick={() => navigate("/profile")}>
+        Your Profile
+      </Button>
       <p />
       <Link to="/" style={{ textDecoration: "none" }} onClick={logout}>
         Log out
