@@ -7,12 +7,12 @@ const ProfilePage = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Assuming user info is in localStorage after login
+  // ✅ use "adminuser" instead of "user"
   useEffect(() => {
-    const loggedUser = JSON.parse(localStorage.getItem("user"));
+    const loggedUser = JSON.parse(localStorage.getItem("adminuser"));
     setUser(loggedUser);
     if (loggedUser) form.setFieldsValue(loggedUser);
-  }, []);
+  }, [form]);
 
   const handleUpdate = async (values) => {
     setLoading(true);
@@ -23,8 +23,11 @@ const ProfilePage = () => {
         values
       );
       message.success("Profile updated successfully!");
-      // Optionally update localStorage
-      localStorage.setItem("user", JSON.stringify({ ...user, ...values }));
+
+      // ✅ Update localStorage with new values
+      const updatedUser = { ...user, ...values };
+      localStorage.setItem("adminuser", JSON.stringify(updatedUser));
+      setUser(updatedUser);
     } catch (error) {
       console.error("Update error:", error.response?.data || error.message);
       message.error(error.response?.data?.error || "Error updating profile.");
@@ -53,7 +56,6 @@ const ProfilePage = () => {
         <Form.Item label="Email" name="email">
           <Input disabled />
         </Form.Item>
-        {/* Add other fields as per your table */}
         <Form.Item label="Phone" name="phone">
           <Input />
         </Form.Item>
@@ -75,4 +77,5 @@ const ProfilePage = () => {
     </div>
   );
 };
+
 export default ProfilePage;
