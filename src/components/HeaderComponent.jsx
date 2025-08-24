@@ -1,5 +1,16 @@
 import React, { useState } from "react";
-import { Avatar, Popover, Button, Tooltip, Flex, Drawer, Row, Col } from "antd";
+import {
+  Avatar,
+  Popover,
+  Button,
+  Tooltip,
+  Flex,
+  Drawer,
+  Row,
+  Col,
+  message,
+  Modal,
+} from "antd";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { UserOutlined, SearchOutlined } from "@ant-design/icons";
 import logo from "./../assets/logo.png";
@@ -33,7 +44,11 @@ const Header = () => {
     });
   };
 
-  const adminuser = localStorage.getItem("adminuser");
+  // const adminuser = localStorage.getItem("adminuser");
+  // Parse the stored JSON string
+  const adminuser = JSON.parse(localStorage.getItem("adminuser") || "null");
+  console.log("Admin User:", adminuser);
+  console.log("Admin User Type:", typeof adminuser);
 
   // Content for logged-in adminuser
   const contentLoggedIn = (
