@@ -15,12 +15,42 @@ const Header = () => {
     }
   };
 
-  const content = (
+  const logout = () => {
+    Modal.confirm({
+      title: "Are you sure you want to log out?",
+      content: "You will be logged out of your account.",
+      okText: "Yes, Log out",
+      cancelText: "Cancel",
+      onOk: () => {
+        localStorage.removeItem("adminuser");
+        localStorage.removeItem("token");
+        message.success("Logged out successfully!");
+        navigate("/signin");
+      },
+      onCancel() {
+        message.info("Log out canceled");
+      },
+    });
+  };
+
+  const adminuser = localStorage.getItem("adminuser");
+
+  // Content for logged-in adminuser
+  const contentLoggedIn = (
     <div>
       <Link to="/Your-Account" style={{ textDecoration: "none" }}>
         Your-Account
       </Link>
       <p />
+      <Link to="/" style={{ textDecoration: "none" }} onClick={logout}>
+        Log out
+      </Link>
+    </div>
+  );
+
+  // Content for not logged-in adminuser
+  const contentNotLoggedIn = (
+    <div>
       <Link to="/Signup" style={{ textDecoration: "none" }}>
         create Your Account
       </Link>
@@ -30,6 +60,22 @@ const Header = () => {
       </Link>
     </div>
   );
+
+  // const content = (
+  //   <div>
+  //     <Link to="/Your-Account" style={{ textDecoration: "none" }}>
+  //       Your-Account
+  //     </Link>
+  //     <p />
+  //     <Link to="/Signup" style={{ textDecoration: "none" }}>
+  //       create Your Account
+  //     </Link>
+  //     <p />
+  //     <Link to="/SignIn" style={{ textDecoration: "none" }}>
+  //       Log in Your Account
+  //     </Link>
+  //   </div>
+  // );
   return (
     <>
       <Row className="header">
@@ -72,15 +118,17 @@ const Header = () => {
         </Col>
         <Row wrap={false}>
           <Col flex="none">
-            <div
-              style={{
-                padding: "0 16px",
-              }}
-            >
-              {/* Person */}
-              <Popover placement="bottom" content={content}>
-                <Avatar className="Account" icon={<UserOutlined />} />
-              </Popover>
+            <div style={{ padding: "0 16px" }}>
+              {/* Account */}
+              {adminuser ? (
+                <Popover placement="bottom" content={contentLoggedIn}>
+                  <Avatar className="Account" icon={<UserOutlined />} />
+                </Popover>
+              ) : (
+                <Popover placement="bottom" content={contentNotLoggedIn}>
+                  <Avatar className="Account" icon={<UserOutlined />} />
+                </Popover>
+              )}
             </div>
           </Col>
         </Row>
