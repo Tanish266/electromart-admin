@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <Header />
-      <div style={{ display: "flex", width: "auto", Height: "100%" }}>
+      <div style={{ display: "flex", width: "auto", height: "100%" }}>
         <Sidebar />
         <Dashboard />
       </div>
